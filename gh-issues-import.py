@@ -221,7 +221,10 @@ def send_request(which, url, post_data=None):
     return json.loads(json_data.decode("utf-8"))
 
 def get_milestones(which):
-    return send_request(which, "milestones?state=open")  
+    milestones = []
+    milestones.extend(send_request(which, "milestones?state=closed"))
+    milestones.extend(send_request(which, "milestones?state=open"))
+    return milestones
 
 def get_labels(which):
     page = 1
